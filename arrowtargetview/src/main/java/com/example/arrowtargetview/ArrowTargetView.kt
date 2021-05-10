@@ -24,11 +24,11 @@ val backColor : Int = Color.parseColor("#BDBDBD")
 val parts : Int = 4
 val scGap : Float = 0.02f / parts
 val strokeFactor : Float = 90f
-val r1Factor  : Float = 12.2f
-val r2Factor : Float = 3.9f
-val lineFactor : Float = 6.7f
-val arrowFactor : Float = 14.2f
-val dFactor : Float = 3.2f
+val r1Factor  : Float = 22.2f
+val r2Factor : Float = 6.9f
+val lineFactor : Float = 8.7f
+val arrowFactor : Float = 15.2f
+val dFactor : Float = 2.2f
 val deg : Float = 45f
 
 fun Int.inverse() : Float = 1f / this
@@ -37,8 +37,6 @@ fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.inverse(), maxScale
 fun Float.sinify() : Float = Math.sin(this * Math.PI).toFloat()
 
 fun Canvas.drawArrowTarget(scale : Float, w : Float, h : Float, paint : Paint) {
-    val w : Float = width.toFloat()
-    val h : Float = height.toFloat()
     val sf : Float = scale.sinify()
     val sf1 : Float = sf.divideScale(0, parts)
     val sf2 : Float = sf.divideScale(1, parts)
@@ -52,10 +50,11 @@ fun Canvas.drawArrowTarget(scale : Float, w : Float, h : Float, paint : Paint) {
     translate(w / 2, h / 2)
     paint.style = Paint.Style.STROKE
     drawArc(RectF(-r1, -r1, r1, r1), 0f, 360f * sf1, false, paint)
-    drawArc(RectF(-r2, -r2, r2, r2), 0f, 360f * sf2, false, paint)
+    drawArc(RectF(-r2, -r2, r2, r2), 0f, 360f * sf1, false, paint)
     paint.style = Paint.Style.FILL
     save()
-    translate(0f, -dFactor * r2 * (1 - sf4))
+    translate(dFactor * r2 * (1 - sf4), -dFactor * r2 * (1 - sf4))
+    scale(1f - 0.5f * sf4, 1f - 0.5f * sf4)
     rotate(deg)
     drawLine(0f, -line + line * sf3, 0f, -line, paint)
     save()
