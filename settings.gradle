@@ -1,0 +1,3 @@
+include ':arrowtargetview'
+include ':app'
+rootProject.name = "LinkedArrowTargetView"
