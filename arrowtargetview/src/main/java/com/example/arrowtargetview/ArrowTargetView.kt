@@ -233,4 +233,13 @@ class ArrowTargetView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : ArrowTargetView {
+            val view : ArrowTargetView = ArrowTargetView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
